@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
 	/** Game Config */
 	Rigidbody	RB_Player;
 	bool		b_IsOnGround = true;
+	public bool	b_GameOver = false;
 	[SerializeField] float	JumpForce = 30.0f;
 	[SerializeField] float	GravityModifier = 10.0f;
 
@@ -21,6 +22,7 @@ public class PlayerController : MonoBehaviour
 	void	Update()
 	{
 		InputHandler();
+		GameEndHandler();
 	}
 
 	void	InputHandler()
@@ -32,8 +34,23 @@ public class PlayerController : MonoBehaviour
 		}
 	}
 
+	void	GameEndHandler()
+	{
+		if (b_GameOver)
+		{
+			Debug.Log("Game Over!");
+		}
+	}
+
 	void	OnCollisionEnter(Collision CollisionObject)
 	{
-		b_IsOnGround = true;
+		if (CollisionObject.gameObject.CompareTag("Ground"))
+		{
+			b_IsOnGround = true;
+		}
+		if (CollisionObject.gameObject.CompareTag("Obstacle"))
+		{
+			b_GameOver = true;
+		}
 	}
 }
