@@ -5,19 +5,30 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 	/** Game Config */
-	Rigidbody	Player;
-	[SerializeField] float	JumpForce = 500.0f;
+	Rigidbody	RB_Player;
+	bool		b_TouchedFloor = true;
+	[SerializeField] float	JumpForce = 750.0f;
+	[SerializeField] float	GravityModifier = 1.0f;
 
 	// Start is called before the first frame update
-	void Start()
+	void	Start()
 	{
-		Player = GetComponent<Rigidbody>();
-		float	JumpForceThisFrame = JumpForce * Time.deltaTime;
-		Player.AddRelativeForce(Vector3.up * JumpForceThisFrame);
+		RB_Player = GetComponent<Rigidbody>();
+		Physics.gravity *= GravityModifier;
 	}
 
 	// Update is called once per frame
-	void Update()
+	void	Update()
 	{
+		InputHandler();
+	}
+
+	void	InputHandler()
+	{
+		if (Input.GetKeyDown(KeyCode.Space) && b_TouchedFloor)
+		{
+			float	JumpForceThisFrame = JumpForce * Time.deltaTime;
+			RB_Player.AddForce(Vector3.up * JumpForceThisFrame, ForceMode.Impulse);
+		}
 	}
 }
