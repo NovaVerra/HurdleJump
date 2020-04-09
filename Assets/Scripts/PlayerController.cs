@@ -6,9 +6,9 @@ public class PlayerController : MonoBehaviour
 {
 	/** Game Config */
 	Rigidbody	RB_Player;
-	bool		b_TouchedFloor = true;
-	[SerializeField] float	JumpForce = 750.0f;
-	[SerializeField] float	GravityModifier = 1.0f;
+	bool		b_IsOnGround = true;
+	[SerializeField] float	JumpForce = 30.0f;
+	[SerializeField] float	GravityModifier = 10.0f;
 
 	// Start is called before the first frame update
 	void	Start()
@@ -25,10 +25,15 @@ public class PlayerController : MonoBehaviour
 
 	void	InputHandler()
 	{
-		if (Input.GetKeyDown(KeyCode.Space) && b_TouchedFloor)
+		if (Input.GetKeyDown(KeyCode.Space) && b_IsOnGround)
 		{
-			float	JumpForceThisFrame = JumpForce * Time.deltaTime;
-			RB_Player.AddForce(Vector3.up * JumpForceThisFrame, ForceMode.Impulse);
+			RB_Player.AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
+			b_IsOnGround = false;
 		}
+	}
+
+	void	OnCollisionEnter(Collision CollisionObject)
+	{
+		b_IsOnGround = true;
 	}
 }
