@@ -242,8 +242,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b1b2b8d48317405292bf37d40b88d2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Parent: {fileID: 298295180}
   ObstaclePrefab: {fileID: 3225378276496237779, guid: 31914b51245f7410a8613a155e01d8c1,
     type: 3}
+  StartDelay: 2
+  Interval: 2
 --- !u!4 &298295180
 Transform:
   m_ObjectHideFlags: 0
@@ -605,10 +608,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1061056600460703813, guid: 8cd237e515d714d6f895067ca25b2c4a,
+    - target: {fileID: 6034734747495024153, guid: 8cd237e515d714d6f895067ca25b2c4a,
         type: 3}
-      propertyPath: JumpForce
-      value: 30
+      propertyPath: m_Constraints
+      value: 122
       objectReference: {fileID: 0}
     - target: {fileID: 6034734748731448088, guid: 8cd237e515d714d6f895067ca25b2c4a,
         type: 3}
